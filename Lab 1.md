@@ -63,6 +63,12 @@ For Authentication with AWS we need to provide `IAM User's CLI Credentials`
 ```
 aws configure
 ```
+To Generate the credentials:
+
+![image](https://github.com/user-attachments/assets/ec0592f6-962e-4192-8279-e0412a94fd7b)
+![image](https://github.com/user-attachments/assets/04639e13-50cc-4969-9a77-c054e369a2f5)
+![image](https://github.com/user-attachments/assets/a9d705c3-9b8e-44c7-a1e9-7aacfbdcd3b7)
+
 Once configured, do a smoke test to check if your credentials are valid and got the access to AWS account.
 ```
 aws s3 ls
