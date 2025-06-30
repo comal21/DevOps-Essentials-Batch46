@@ -3,11 +3,11 @@
 ### Task 1: Manually launch the Jump Server EC2 Instance
 
 * Region: North Virginia (us-east-1).
-* Use tag Name: `Mehar-Jump-Server`
+* Use tag Name: `Jump-Server`
 * AMI Type and OS Version: `Ubuntu 22.04 LTS`
 * Instance type: `t2.micro`
-* Create key pair with name: `Mehar-DevOps-Keypair`
-* Create security group with name: `Mehar-DevOps-SG`
+* Create key pair with name: `DevOps-Keypair`
+* Create security group with name: `DevOps-SG`
    (Include Ports: `22 [SSH],` `80 [HTTP],` `8080 [Jenkins],` `9999 [Tomcat],` and `4243 [Docker]`)
 * Configure Storage: 10 GiB
 * Click on `Launch Instance.`
@@ -29,7 +29,7 @@ sudo apt install wget unzip -y
 ```
 wget https://releases.hashicorp.com/terraform/1.9.2/terraform_1.9.2_linux_amd64.zip
 ```
-[Click here](https://developer.hashicorp.com/terraform/downloads) for Terraform's Latest Versions
+
 ```
 unzip terraform_1.9.2_linux_amd64.zip
 ls
@@ -43,8 +43,6 @@ rm terraform_1.9.2_linux_amd64.zip
 ```
 terraform -v
 ```
-
-![image](https://github.com/user-attachments/assets/4dc530fa-b206-4bf2-a0eb-9499ff9e923a)
 
 ### Task 3: Install Python 3, pip, AWS CLI, and Ansible on to Jump Server
 Install Python 3 and the required packages:
@@ -86,7 +84,6 @@ Cross verify using the below command
 ```
 ls -la /etc/ansible/
 ```
-![image](https://github.com/user-attachments/assets/25314a0c-8d3c-483b-96a8-0b7be2017424)
 
 
 ### Task 5: Utilizing Terraform, initiate the deployment of two new servers: `Docker-server` and `Jenkins-server` 
@@ -103,7 +100,6 @@ As a first step, create a keyPair using `ssh-keygen` Command.
 ```
 ssh-keygen -t rsa -b 2048 
 ```
-![image](https://github.com/user-attachments/assets/2e81febd-047c-46e6-9c6b-1e9056613866)
 
 Now Create the terraform directory and set up the config files in it
 ```
@@ -198,7 +194,7 @@ vi variables.tf
 ### Add your Name for **KeyPair** ("**YourName**-CICDlab-KeyPair")
 
 variable "region" {
-    default = "us-east-1"
+    default = "us-east-2"
 }
 
 # Change the SG ID. You can use the same SG ID used for your CICD Jump server
@@ -228,7 +224,7 @@ variable public_key {
 
 variable "my-servers" {
   type    = list(string)
-  default = ["Mehar-Jenkins-Server", "Mehar-Docker-Server"]
+  default = ["Jenkins-Server", "Docker-Server"]
 }
 ```
 Now, execute the terraform commands to launch the new servers
@@ -245,8 +241,6 @@ Once the Changes are Applies, Go to `EC2 Dashboard` and check that `2 New Instan
 ```
 cat /etc/ansible/hosts
 ```
-![image](https://github.com/user-attachments/assets/b882382f-ba8b-4ca1-b9e7-a96bdbf664a9)
-
 
 ### Task 6: Check the access from `Jump to Jenkins` and `Jump to Docker`
 
@@ -306,7 +300,7 @@ Copy and paste the below code and save it.
 ---
 
 - name: Start installing Jenkins pre-requisites before installing Jenkins
-  hosts: Mehar-Jenkins-Server
+  hosts: Jenkins-Server
   become: yes
   become_method: sudo
   gather_facts: no
@@ -359,7 +353,7 @@ Copy and paste the below code and save it.
 
 
 - name: Start the Docker installation steps
-  hosts: Mehar-Docker-Server
+  hosts: Docker-Server
   become: yes
   become_method: sudo
   gather_facts: no
@@ -428,7 +422,6 @@ Run the above playbook to deploy the packages onto target servers.
 ```
 ansible-playbook main.yaml
 ```
-![image](https://github.com/user-attachments/assets/08b775c7-3f56-4aac-87bd-c0f97f01badb)
 
 
 ### Task 8 : Verify the Jenkins and Docker landing page.
@@ -440,10 +433,7 @@ Verify the Docker Landing Page: Open a web browser and access the Docker landing
 ```
 http://<Your_Docker_IP>:4243/version
 ```
-![image](https://github.com/user-attachments/assets/0fef3915-1827-4d21-8ecf-4041d0ad5d5a)
 
-
-![image](https://github.com/user-attachments/assets/79549c26-2e4c-453c-aef9-7d1500207ddc)
 
 
 
