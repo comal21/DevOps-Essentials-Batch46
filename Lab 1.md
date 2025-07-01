@@ -4,7 +4,7 @@
 
 * Region: North Virginia (us-east-1).
 * Use tag Name: `Jump-Server`
-* AMI Type and OS Version: `Ubuntu 22.04 LTS`
+* AMI Type and OS Version: `Ubuntu 24.04 LTS`
 * Instance type: `t2.micro`
 * Create key pair with name: `DevOps-Keypair`
 * Create security group with name: `DevOps-SG`
