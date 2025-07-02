@@ -29,10 +29,10 @@ sudo apt install git -y
 ```
 Download the **Java Code** that we are going to use in the CICD pipeline.
 ```
-wget https://hsbctraining.s3.us-east-2.amazonaws.com/hello-world-master.zip
+ wget https://devopslab-komal.s3.us-east-1.amazonaws.com/hello-world-master+(1).zip
 ```
 ```
-unzip hello-world-master.zip
+unzip 'hello-world-master+(1).zip'
 ```
 ```
 ls
