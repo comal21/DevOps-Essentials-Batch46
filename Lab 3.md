@@ -62,7 +62,7 @@ ss -ltn
 ```
 when you run `ss -ltn` command you'll see a list of `TCP sockets` that are in a listening state, and the output will include information such as the `local address,` `port,` and the `state of each socket.`
 ```
-sudo systemctl enable tomcat10
+sudo systemctl enable tomcat9
 ```
 Now we need to navigate to **server.xml** to change the Tomcat port number from **8080 to 9999**.
 (As port number 8080 is already being used by the Jenkins website)
