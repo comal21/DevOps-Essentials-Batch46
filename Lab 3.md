@@ -144,7 +144,7 @@ This command assumes that your Jenkins job has built a WAR file named `hello-wor
 
 * Once this is done, go to your browser and enter Jenkins Public IP address followed by port 9999 and path (URL:  **http://< Jenkins Public IP >:9999/hello-world-war-1.0.0/**).
 * Now, you can see that Tomcat is now serving your web page
-* Now, Stop tomcat10 and remove it. Otherwise, it will slow down the Jenkins server.
+* Now, Stop tomcat9 and remove it. Otherwise, it will slow down the Jenkins server.
 ```
 sudo service tomcat9 stop
 ```
