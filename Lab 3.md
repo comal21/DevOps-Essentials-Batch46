@@ -55,7 +55,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 sudo apt update
 ```
 ```
-sudo apt install tomcat10 tomcat10-admin -y
+sudo apt install tomcat9 tomcat9-admin -y
 ```
 ```
 ss -ltn
@@ -67,11 +67,11 @@ sudo systemctl enable tomcat10
 Now we need to navigate to **server.xml** to change the Tomcat port number from **8080 to 9999**.
 (As port number 8080 is already being used by the Jenkins website)
 ```
-sudo vi /etc/tomcat10/server.xml
+sudo vi /etc/tomcat9/server.xml
 ```
 **(Optional step):** If you are unable to open the file then change the permissions by using the below command.
 ```
-sudo chmod 766 /etc/tomcat10/server.xml
+sudo chmod 766 /etc/tomcat9/server.xml
 ```
 #### Change 8080 to 9999
 * press esc & Enter **":"** and copy paste below code and hit enter
@@ -82,14 +82,14 @@ Save the file using `ESCAPE+:wq!`
 
 * To Verify whether the Port is changed, execute the below Command.
 ```
-cat /etc/tomcat10/server.xml
+cat /etc/tomcat9/server.xml
 ```
 **(Optional step):** If you are unable to open the file then change the permissions by using the below command.
 ```
-sudo chmod 766 /etc/tomcat10/server.xml
+sudo chmod 766 /etc/tomcat9/server.xml
 ```
 ```
-sudo vi /etc/default/tomcat10
+sudo vi /etc/default/tomcat9
 ```
 Paste the path of jdk inside the file
 ```
@@ -97,16 +97,16 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ```
 Now restart the system for the changes to take effect
 ```
-sudo service tomcat10 restart
+sudo service tomcat9 restart
 ```
 ```
-sudo service tomcat10 status
+sudo service tomcat9 status
 ```
 **To exit**, press **ctrl+c**
 
 If any error is present asking for the value of JAVA_HOME
 ```
-vi /etc/default/tomcat10
+vi /etc/default/tomcat9
 ```
 add the following line to the end of the file
 ```
@@ -114,10 +114,10 @@ JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 ```
 Now restart the system for the changes to take effect
 ```
-sudo service tomcat10 restart
+sudo service tomcat9 restart
 ```
 ```
-sudo service tomcat10 status
+sudo service tomcat9 status
 ```
 * Once the Tomcat service restart is successful, go to your web browser and enter **Jenkins Server's Public IP address** followed by **9999** port.
 
@@ -126,7 +126,7 @@ sudo service tomcat10 status
 * Now you can check the Tomcat running on **port 9999** on the same machine.
 * We need to copy the **.war** file created in the previous Jenkins build from the Jenkins workspace to tomcat webapps directory to serve the web content
 ```
-sudo cp -R /var/lib/jenkins/workspace/hello-world/target/hello-world-war-1.0.0.war /var/lib/tomcat10/webapps
+sudo cp -R /var/lib/jenkins/workspace/hello-world/target/hello-world-war-1.0.0.war /var/lib/tomcat9/webapps
 ```
 The above command is copying a `WAR (Web Application Archive)` file from the Jenkins workspace to the Tomcat web apps directory. Let's break down the command:
 
@@ -138,7 +138,7 @@ The above command is copying a `WAR (Web Application Archive)` file from the Jen
 
 - `/var/lib/jenkins/workspace/hello-world/target/hello-world-war-1.0.0.war`: Source path, specifying the location of the WAR file in the Jenkins workspace.
 
-- `/var/lib/tomcat10/webapps`: Destination path, indicating the Tomcat webapps directory where the WAR file is being copied.
+- `/var/lib/tomcat9/webapps`: Destination path, indicating the Tomcat webapps directory where the WAR file is being copied.
 
 This command assumes that your Jenkins job has built a WAR file named `hello-world-war-1.0.0.war` in the specified workspace directory. It then copies this WAR file into the Tomcat webapps directory, allowing Tomcat to deploy and run the web application.
 
@@ -146,10 +146,10 @@ This command assumes that your Jenkins job has built a WAR file named `hello-wor
 * Now, you can see that Tomcat is now serving your web page
 * Now, Stop tomcat10 and remove it. Otherwise, it will slow down the Jenkins server.
 ```
-sudo service tomcat10 stop
+sudo service tomcat9 stop
 ```
 ```
-sudo apt remove tomcat10 -y
+sudo apt remove tomcat9 -y
 ```
 ---------------------------------------------------------------------
 **Summary:**
