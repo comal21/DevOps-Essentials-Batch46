@@ -47,8 +47,6 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ---------------------------------------------------------------------
 ### Task-2: Installing and Configuring Tomcat for Deploying our Application on Jenkins Server
 
-![image](https://github.com/janjiralakirankumar/DevOpsEssentials/assets/137407373/d5dde194-f10d-4b4d-a20c-890e9ca3e392)
-
 * Now, SSH into the Jenkins server (Make sure that you are the root user and Install the Tomcat web server)
 * **Note:** (If you are already in Jenkins Server, again SSH is not needed.)
 
