@@ -17,7 +17,7 @@ echo "Line 2" >> example.txt
 echo "Line 3" >> example.txt
 ```
 
-## 3. Commit this file to the main branch:
+## 3. Commit this file to the master branch:
 
 ```bash
 git add example.txt
@@ -34,21 +34,21 @@ git add example.txt
 git commit -m "Added line 4 in feature-branch"
 ```
 
-## 5. Switch Back to main Branch:
+## 5. Switch Back to master Branch:
 
 ```bash
-git checkout main
+git checkout master
 ```
 
-## 6. Modify the Same File in main:
+## 6. Modify the Same File in master:
 
 ```bash
-echo "Line 4 from main" >> example.txt
+echo "Line 4 from master" >> example.txt
 git add example.txt
-git commit -m "Added line 4 in main"
+git commit -m "Added line 4 in master"
 ```
 
-## 7. Attempt to Merge `feature-branch` into `main`:
+## 7. Attempt to Merge `feature-branch` into `master`:
 
 ```bash
 git merge feature-branch
@@ -84,7 +84,7 @@ Line 4 (merged from both branches)
 
 ```bash
 git add example.txt
-git commit -m "Resolved merge conflict between main and feature-branch"
+git commit -m "Resolved merge conflict between master and feature-branch"
 ```
 
 ## 12. Once everything is resolved and merged, you can delete the `feature-branch` locally:
