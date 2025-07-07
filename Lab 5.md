@@ -4,25 +4,104 @@
 In this lab, you will set up a Docker container as a Jenkins slave, build a Docker image for a Java web application, and deploy it in a Docker container.
 
 
-### Task-0: Configuring Key pair.
-* SSH into docker-server
-* Change to the root user
+### Task-0: Configuring Key pair (for Jenkins to SSH into Docker Server).
+
+### Step 1: SSH into the Jenkins Server
+
+From your **jumpserver or local terminal**, SSH into the Jenkins server:
+
+```bash
+ssh -i <your-key.pem> ubuntu@<jenkins-server-public-ip>
 ```
+
+Switch to the `root` user:
+
+```bash
 sudo su
 ```
-* Generate a key-pair
-```
+
+---
+
+### Step 2: Generate SSH Key Pair on Jenkins Server (as root)
+
+```bash
 ssh-keygen
 ```
-* Add the public key to the authorized_keys
-```
+
+* Press `ENTER` at all prompts (to accept default file location and no passphrase).
+* This creates:
+
+  * Private key: `/root/.ssh/id_rsa`
+  * Public key: `/root/.ssh/id_rsa.pub`
+
+---
+
+### Step 3: Copy the Public Key
+
+Display the public key:
+
+```bash
 cat /root/.ssh/id_rsa.pub
 ```
-* Copy the contents of the file and paste in authorized_keys
+
+Copy the full output (it will start with `ssh-rsa`...).
+
+---
+
+### Step 4: SSH into Docker Server
+
+From your terminal (new tab or logout from Jenkins), SSH into Docker server:
+
+```bash
+ssh -i <your-key.pem> ubuntu@<docker-server-public-ip>
 ```
+
+Switch to root:
+
+```bash
+sudo su
+```
+
+---
+
+### Step 5: Add Jenkins Public Key to Docker's Authorized Keys
+
+Ensure `.ssh` directory exists:
+
+```bash
+mkdir -p /root/.ssh
+chmod 700 /root/.ssh
+```
+
+Edit the authorized keys file:
+
+```bash
 vi /root/.ssh/authorized_keys
 ```
-* Save the file using `ESCAPE+:wq!`
+
+* Paste the **Jenkins public key** you copied earlier.
+* Save and exit: press `ESC`, then type `:wq!` and press `ENTER`.
+
+Set correct permissions:
+
+```bash
+chmod 600 /root/.ssh/authorized_keys
+```
+
+---
+### Step 6: Test SSH from Jenkins to Docker
+
+Go back to your **Jenkins server**, as `root`, and run:
+
+```bash
+ssh root@<docker-server-private-ip>
+```
+
+* You should log in **without password**.
+* If successful, SSH key setup is complete.
+
+---
+
 
 ### Task-1: Configuring Docker Machine as Jenkins Slave.
 
