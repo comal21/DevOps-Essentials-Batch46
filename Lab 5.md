@@ -158,9 +158,6 @@ To access the Page In Browser Type **"http:// < Your Docker Host Public IP >:808
 7. Access the deployed web application in the Docker container via the Docker host's public IP.
 
 ---------------------------------------------------------------------
-Once Done, It's time to **Clean up** the Instances
-
-We can now **terminate all the 3 instances** and we are Done with All Labs.
 
 #### =============================END of LAB-05=============================
 ---
