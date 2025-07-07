@@ -109,17 +109,28 @@ ssh root@<docker-server-private-ip>
 2. Click on **New Node** in the next window. Give the node name as **docker-slave** and Select **"permanent agent"**
 3. Fill out the details for the node docker-slave as given below.
 * The name should be given as **docker-slave**,
-* Remote Root Directory as **/home/ubuntu**,
+
+The Remote root directory is the folder on the Docker server (slave node) where Jenkins will:
+
+* Store workspace files
+* Execute build jobs
+* Manage agent runtime
+## If you're using root user to connect, You must create it on the Docker server if it doesn’t exist:
+```
+sudo mkdir -p /root/jenkins
+sudo chown root:root /root/jenkins
+```
+* Remote Root Directory as **/root/jenkins**,
 * labels to be **Slave-Nodes**,
 * usage to be given as **"use this node as much as possible"**
 * Launch method to be set as **"launch agents via SSH"**.
-* In the host section, give the **Public IP of the Docker instance**.
+* In the host section, give the **Private IP of the Docker instance**.
 * For Credentials for this Docker node, click on the dropdown button named **Add** and then click on **Jenkins**;
 * Then in the next window, in kind select **SSH username with private key** (give username as root),
-* In **Private Key** Select **Enter directly** then Copy-Paste the Private Key and then click on **Add** .
+* In **Private Key** Select **Enter directly** then Copy-Paste the Private Key from the jenkins server and then click on **Add** .
 
 **Note:**
-To get the private key, Go to your **Docker-server** and run below command.
+To get the private key, Go to your **Jenkins-server** and run below command.
 ```
 cd /root/.ssh
 cat id_rsa
