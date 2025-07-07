@@ -25,7 +25,7 @@ sudo su
 ### Step 2: Generate SSH Key Pair on Jenkins Server (as root)
 
 ```bash
-ssh-keygen
+ssh-keygen -t rsa
 ```
 
 * Press `ENTER` at all prompts (to accept default file location and no passphrase).
